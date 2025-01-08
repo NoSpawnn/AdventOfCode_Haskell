@@ -7,13 +7,11 @@ main = do
   print $ part1 pairs
   print $ part2 pairs
 
-part1 :: [(Int, Int)] -> Int
+part1, part2 :: [(Int, Int)] -> Int
 part1 pairs = sum $ abs <$> zipWith (-) (sort lefts) (sort rights)
   where
     (lefts, rights) = unzip pairs
-
-part2 :: [(Int, Int)] -> Int
-part2 pairs = sum $ fmap score lefts
+part2 pairs = sum $ score <$> lefts
   where
     (lefts, rights) = unzip pairs
     score n = n * length (filter (== n) rights)
